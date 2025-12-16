@@ -1,4 +1,4 @@
-Aşağıdaki diyagram + zaman-sıralı liste, tek bir git push’tan başlayarak modelin eğitilmesinden → Kaggle verisinin DVC ile çekilmesinden → Docker imajının oluşmasına kadar gerçekte neyin ne zaman çalıştığını gösteriyor.
+Aşağıdaki diyagram + zaman-sıralı liste, tek bir git push’tan başlayarak modelin kaggleda eğitilmesinden → Kaggle verisinin DVC ile çekilmesinden → Docker imajının oluşmasına kadar gerçekte neyin ne zaman çalıştığını gösteriyor.
 
 ┌-------------┐
 │  Developer  │  git push origin main

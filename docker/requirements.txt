@@ -1,0 +1,25 @@
+# Core training
+torch>=2.1.0
+transformers>=4.40.0
+datasets>=2.18.0
+peft>=0.11.0
+trl>=0.8.0
+unsloth[cu118]>=2024.5.1
+
+# Serving
+vllm>=0.4.1
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+
+# Evaluation
+evaluate>=0.4.1
+bleu>=0.1.0
+rouge-score>=0.1.2
+
+# Utils
+wandb>=0.16.0
+huggingface-hub>=0.21.0
+pyyaml>=6.0
+fire>=0.5.0
+dvc>=3.0
+kaggle>=1.6

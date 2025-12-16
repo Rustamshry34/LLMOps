@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Data & Models
+data/
+outputs/
+*.parquet
+*.bin
+*.safetensors
+
+# DVC
+.dvc/
+*.dvc
+!dvc.yaml
+
+# W&B
+wandb/
+
+# Docker
+*.tar
+.dockerignore
+
+# IDE
+.vscode/
+.idea/

@@ -7,7 +7,6 @@
   "is_private": true,
   "enable_gpu": true,
   "enable_internet": true,
-  "dataset_sources": ["moremilk/cot-rare-diseases-and-health-conditions"],
   "competition_sources": [],
   "kernel_sources": []
 }

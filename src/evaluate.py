@@ -17,7 +17,7 @@ model     = AutoModelForCausalLM.from_pretrained(
 )
 
 test_ds = load_dataset(
-    "moremilk/CoT_Rare-Diseases_And_Health-Conditions",
+    "moremilk/CoT_Temporal_Reasoning_Dataset",
     split=f"train[:{TEST_SAMPLES}]"
 )
 

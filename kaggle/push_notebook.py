@@ -9,10 +9,6 @@ os.environ["KAGGLE_KEY"]      = os.getenv("KAGGLE_KEY")
 
 kaggle.api.authenticate()
 
-metadata["enable_gpu"] = True
-metadata["keywords"] = ["accelerator", "nvidia-tesla-t4"]
-metadata["is_private"] = False
-metadata["draft"] = True          # ← yeni
 
 # temp klasörüne metadata + notebook kopyala
 os.makedirs("tmp", exist_ok=True)

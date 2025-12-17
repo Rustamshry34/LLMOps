@@ -21,7 +21,7 @@ def generate_conversation(examples):
 def build_combined_dataset(tokenizer, non_reasoning_pct: float = 0.0, seed=3407):
     # ---------- reasoning ----------
     reasoning_ds = load_dataset(
-        "moremilk/CoT_Rare-Diseases_And_Health-Conditions",
+        "moremilk/CoT_Temporal_Reasoning_Dataset",
         split="train"
     )
     reasoning_ds = reasoning_ds.map(

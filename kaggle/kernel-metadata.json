@@ -7,7 +7,7 @@
   "is_private": true,
   "enable_gpu": true,
   "enable_internet": true,
-  "accelerator": "Tesla T4"
+  "accelerator": "T4"
   "competition_sources": [],
   "kernel_sources": []
 }

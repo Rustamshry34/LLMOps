@@ -53,13 +53,7 @@ losses = []
 # --------------------------------------------------
 for sample in tqdm(test_ds, desc="Evaluating"):
     prompt = sample["question"]
-    reasoning = sample.get("metadata", {}).get("reasoning", "")
-    answer = sample["answer"]
-
-    if reasoning:
-        reference = f"<think>\n{reasoning}\n</think>\n<answer>\n{answer}\n</answer>"
-    else:
-        reference = f"<answer>\n{answer}\n</answer>"
+    reference = sample["answer"]
     
     messages = [{"role": "user", "content": prompt}]
     text = tokenizer.apply_chat_template(

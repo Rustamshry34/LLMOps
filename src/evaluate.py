@@ -14,7 +14,7 @@ from tqdm import tqdm
 
 TOKENIZER_DIR = "./outputs"
 MODEL_DIR     = "./outputs"
-TEST_SAMPLES  = 50   # CI için hızlı feedback
+TEST_SAMPLES  = 250   # CI için hızlı feedback
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -76,15 +76,30 @@ for sample in tqdm(test_ds, desc="Evaluating"):
         )
 
     hyp = tokenizer.decode(out[0], skip_special_tokens=True)
+    
+    def extract_answer(text: str) -> str:
+        if "<answer>" in text:
+            return text.split("<answer>")[-1].split("</answer>")[0].strip()
+        return text.strip()
 
 
-    hyps.append(hyp)
+    hyps.append(extract_answer(hyp))
     refs.append(reference)
 
+
     # ---- perplexity ----
+    ppl_inputs = tokenizer(
+        answer,
+        return_tensors="pt",
+        truncation=True,
+        max_length=1024
+    ).to(model.device)
+
     with torch.no_grad():
-        labels = inputs["input_ids"]
-        outputs = model(**inputs, labels=labels)
+        outputs = model(
+            **ppl_inputs,
+            labels=ppl_inputs["input_ids"]
+        )
         losses.append(outputs.loss.item())
 
 # --------------------------------------------------

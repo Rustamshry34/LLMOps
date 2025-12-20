@@ -8,10 +8,18 @@ import json
 import re
 from huggingface_hub import HfApi
 
-MODEL_ID      = os.getenv("MODEL_ID")               # your-hf-username/nizami-1.7b-cot
+MODEL_ID      = os.getenv("MODEL_ID")              
 HF_TOKEN      = os.getenv("HF_TOKEN")
 LOCAL_DIR     = "./outputs"
-BLEU_THRESHOLD = 0.01   # pipeline.txt ilk iterasyonu için oldukça düşük tutalım
+
+# ---- quality thresholds ----
+
+THRESHOLDS = {
+    "bleu": 0.03,
+    "meteor": 0.15,
+    "chrf": 30.0,
+    "perplexity": 20.0,
+}
 
 api = HfApi(token=HF_TOKEN)
 
@@ -67,20 +75,45 @@ print(f"🏷️  Created tag {next_version}")
 try:
     with open("metrics.json", encoding="utf-8") as f:
         metrics = json.load(f)
-    bleu = metrics.get("bleu", 0.0)
 except FileNotFoundError:
-    bleu = 0.0
+    print("❌ metrics.json not found → skipping prod promotion")
+    exit(0)
 
-# 3. tag prod if threshold passed
-if bleu >= BLEU_THRESHOLD:
+
+# ---- backward compatible parsing ----
+gen = metrics.get("generation", metrics)
+lm  = metrics.get("language_model", metrics)
+
+bleu = float(gen.get("bleu", 0.0))
+meteor = float(gen.get("meteor", 0.0))
+chrf = float(gen.get("chrf", 0.0))
+ppl = float(lm.get("perplexity", float("inf")))
+
+print(
+    f"📊 Metrics → BLEU={bleu:.4f}, "
+    f"METEOR={meteor:.4f}, chrF={chrf:.2f}, PPL={ppl:.2f}"
+)
+
+# --------------------------------------------------
+# 5. Multi-metric quality gate
+# --------------------------------------------------
+passed = (
+    bleu >= THRESHOLDS["bleu"]
+    and meteor >= THRESHOLDS["meteor"]
+    and chrf >= THRESHOLDS["chrf"]
+    and ppl <= THRESHOLDS["perplexity"]
+)
+
+if passed:
     api.create_tag(
         repo_id=MODEL_ID,
         tag="prod",
+        repo_type="model",
         token=HF_TOKEN,
         exist_ok=True
     )
-    print(f"✅ Tagged 'prod' (BLEU={bleu:.3f})")
+    print(f"✅ Promoted {next_version} → prod")
 else:
-    print(f"⚠️  BLEU={bleu:.3f} < threshold ({BLEU_THRESHOLD}), prod tag skipped.")
+    print("⚠️  Quality gate failed → prod not updated")
 
-print("Upload complete →", MODEL_ID)
+print(f"🚀 Upload complete → {MODEL_ID}@{next_version}")

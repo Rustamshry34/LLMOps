@@ -2,6 +2,9 @@
 vllm>=0.11.1
 unsloth>=2025.12.5
 dataset>=4.3.0
+torch>=2.9.0 
+transformers>=4.57.0 
+
 
 # Serving 
 fastapi>=0.116.1

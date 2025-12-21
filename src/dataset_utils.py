@@ -1,7 +1,3 @@
-
-from datasets import load_dataset, Dataset
-import pandas as pd
-
 def generate_conversation(examples):
     problems  = examples["question"]
     metadata  = examples["metadata"]
@@ -16,6 +12,8 @@ def generate_conversation(examples):
     return {"conversations": conversations}
 
 def build_combined_dataset(tokenizer, non_reasoning_pct: float = 0.0, seed=3407):
+    from datasets import load_dataset, Dataset
+    import pandas as pd
     # ---------- reasoning ----------
     reasoning_ds = load_dataset(
         "moremilk/CoT_Temporal_Reasoning_Dataset",

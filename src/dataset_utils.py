@@ -1,6 +1,5 @@
 
 from datasets import load_dataset, Dataset
-from unsloth.chat_templates import standardize_sharegpt
 import pandas as pd
 
 
@@ -19,6 +18,7 @@ def generate_conversation(examples):
 
 
 def build_combined_dataset(tokenizer, non_reasoning_pct: float = 0.0, seed=3407):
+    from unsloth.chat_templates import standardize_sharegpt
     # ---------- reasoning ----------
     reasoning_ds = load_dataset(
         "moremilk/CoT_Temporal_Reasoning_Dataset",

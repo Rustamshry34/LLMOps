@@ -2,7 +2,6 @@
 from datasets import load_dataset, Dataset
 import pandas as pd
 
-
 def generate_conversation(examples):
     problems  = examples["question"]
     metadata  = examples["metadata"]
@@ -16,9 +15,7 @@ def generate_conversation(examples):
         ])
     return {"conversations": conversations}
 
-
 def build_combined_dataset(tokenizer, non_reasoning_pct: float = 0.0, seed=3407):
-    from unsloth.chat_templates import standardize_sharegpt
     # ---------- reasoning ----------
     reasoning_ds = load_dataset(
         "moremilk/CoT_Temporal_Reasoning_Dataset",
@@ -26,27 +23,15 @@ def build_combined_dataset(tokenizer, non_reasoning_pct: float = 0.0, seed=3407)
     )
     reasoning_ds = reasoning_ds.map(
         generate_conversation,
-        batched=True,
-        remove_columns=reasoning_ds.column_names
+        batched=True
     )
-    reasoning_text = [
+    reasoning_conversation = [
         tokenizer.apply_chat_template(conv, tokenize=False)
         for conv in reasoning_ds["conversations"]
     ]
 
-    # ---------- non-reasoning ----------
-    non_ds = load_dataset("mlabonne/FineTome-100k", split="train")
-    non_ds = standardize_sharegpt(non_ds)
-    non_text = tokenizer.apply_chat_template(
-        non_ds["conversations"],
-        tokenize=False
-    )
-    n_non = int(len(non_text) * non_reasoning_pct)
-    if n_non:
-        non_text = non_text.sample(n=n_non, random_state=seed)
-
     # ---------- concat ----------
-    data = pd.Series(reasoning_text + non_text.tolist() if hasattr(non_text, "tolist") else reasoning_text)
+    data = pd.concat([pd.Series(reasoning_conversation),])
     data.name = "text"
     return Dataset.from_pandas(pd.DataFrame(data)).shuffle(seed=seed)
 

@@ -31,7 +31,15 @@ class GenerateResponse(BaseModel):
 
 @app.post("/generate", response_model=GenerateResponse)
 def generate(req: GenerateRequest):
-    output = llm.generate(req.prompt, sampling)
+    messages = [{"role": "user", "content": req.prompt}]
+    text = tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True,
+        enable_thinking=True,
+    )
+    inputs = text
+    output = llm.generate(inputs, sampling)
     return GenerateResponse(text=output[0].outputs[0].text)
 
 @app.get("/health")

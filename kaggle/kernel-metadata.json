@@ -8,7 +8,8 @@
   "is_private": true,
   "enable_gpu": true,
   "enable_internet": true,
-  "accelerator": "GPU T4 x2",
+  "accelerator": "tesla_t4",
+  "accelerator_count": 2,
   "competition_sources": [],
   "kernel_sources": []
 }

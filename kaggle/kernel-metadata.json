@@ -9,7 +9,7 @@
   "enable_gpu": true,
   "enable_internet": true,
   "accelerator": "Tesla T4",
-  "accelerator_count": 1,
+  "accelerator_count": 2,
   "competition_sources": [],
   "kernel_sources": []
 }

@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from vllm import LLM, SamplingParams
 
-MODEL_ID = os.getenv("MODEL_ID", "your-hf-username/nizami-1.7b-cot")
+MODEL_ID = os.getenv("MODEL_ID", "Rustamshry/Qwen3-CoT")
 
 app = FastAPI(title="Nizami-1.7B-CoT")
 

@@ -11,6 +11,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from datasets import load_dataset
 from evaluate import load
 from tqdm import tqdm
+from peft import PeftModel
 
 #TOKENIZER_DIR = "./outputs"
 #MODEL_DIR     = "./outputs"

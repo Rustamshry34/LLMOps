@@ -13,6 +13,6 @@ COPY --from=builder /opt/conda/lib/python3.10/site-packages /opt/conda/lib/pytho
 COPY --from=builder /opt/conda/bin /opt/conda/bin
 
 COPY src/serve.py /app/
-ENV MODEL_ID=${MODEL_ID:-your-hf-username/nizami-1.7b-cot}
+ENV MODEL_ID=${MODEL_ID:-Rustamshry/Qwen3-CoT}
 EXPOSE 8000
 CMD ["uvicorn", "serve:app", "--host", "0.0.0.0", "--port", "8000"]

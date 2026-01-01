@@ -12,7 +12,7 @@ env:
   WANDB_API_KEY:   ${{ secrets.WANDB_API_KEY }}
   KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
   KAGGLE_KEY:      ${{ secrets.KAGGLE_KEY }}
-  MODEL_ID:        ${{ github.repository_owner }}/nizami-1.7b-cot
+  MODEL_ID:        Rustamshry/Qwen-CoT
 
 jobs:
   train-on-kaggle:

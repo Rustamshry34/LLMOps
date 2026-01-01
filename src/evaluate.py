@@ -89,7 +89,7 @@ for sample in tqdm(test_ds, desc="Evaluating"):
 
     # ---- perplexity ----
     ppl_inputs = tokenizer(
-        answer,
+        reference,
         return_tensors="pt",
         truncation=True,
         max_length=1024

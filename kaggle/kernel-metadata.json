@@ -1,6 +1,5 @@
 {
   "id": "rustamshiriyev/nizami-1-7b-cot-train",
-  "dataset_sources": ["rustamshiriyev/my-secrets"],
   "title": "Nizami-1.7B-CoT-Train",
   "code_file": "notebook.ipynb",
   "language": "python",

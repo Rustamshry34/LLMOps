@@ -10,7 +10,7 @@ from huggingface_hub import HfApi
 
 MODEL_ID      = os.getenv("MODEL_ID")              
 HF_TOKEN      = os.getenv("HF_TOKEN")
-LOCAL_DIR     = "./outputs"
+#LOCAL_DIR     = "./outputs"
 
 # ---- quality thresholds ----
 
@@ -49,13 +49,13 @@ print(f"📦 Next model version → {next_version}")
 
 
 # 1. upload folder
-api.upload_folder(
-    folder_path=LOCAL_DIR,
-    repo_id=MODEL_ID,
-    repo_type="model",
-    token=HF_TOKEN,
-    commit_message=f"Add LoRA adapter & tokenizer({next_version})"
-)
+#api.upload_folder(
+    #folder_path=LOCAL_DIR,
+    #repo_id=MODEL_ID,
+    #repo_type="model",
+    #token=HF_TOKEN,
+    #commit_message=f"Add LoRA adapter & tokenizer({next_version})"
+#)
 
 # --------------------------------------------------
 # 3. Create version tag

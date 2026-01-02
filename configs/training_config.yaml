@@ -13,3 +13,4 @@ report_to: "wandb"
 dataloader_num_workers: 4
 weight_decay: 0.01
 gradient_checkpointing: true
+save_strategy: "no"

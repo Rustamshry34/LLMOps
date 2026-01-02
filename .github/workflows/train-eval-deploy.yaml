@@ -48,6 +48,24 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with: {python-version: '3.10'}
+        
+      - name: Install Kaggle API
+        run: pip install kaggle
+
+      - name: Download model from Kaggle Dataset
+        run: |
+          mkdir -p ./outputs
+          kaggle datasets download -d rustamshry34/nizami-model-output --unzip -p ./outputs
+          # Dataset ZIP içinde klasör yapısı düzeltme
+          if [ -d "./outputs/nizami-model-output" ]; then
+            mv ./outputs/nizami-model-output/outputs/* ./outputs/ 2>/dev/null || true
+            rmdir ./outputs/nizami-model-output/outputs 2>/dev/null || true
+            rmdir ./outputs/nizami-model-output 2>/dev/null || true
+          fi
+          # Veya doğrudan outputs varsa:
+          if [ ! -f "./outputs/adapter_config.json" ]; then
+            echo "⚠️  WARNING: ./outputs may be empty or malformed"
+          fi
       - run: pip install -r docker/requirements.txt
       - run: python src/evaluate.py
       - uses: actions/upload-artifact@v3

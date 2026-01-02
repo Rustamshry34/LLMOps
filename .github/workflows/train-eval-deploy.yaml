@@ -55,7 +55,7 @@ jobs:
       - name: Download model from Kaggle Dataset
         run: |
           mkdir -p ./outputs
-          kaggle datasets download -d rustamshry34/nizami-model-output --unzip -p ./outputs
+          kaggle datasets download -d rustamshiriyev/nizami-model-output --unzip -p ./outputs
           # Dataset ZIP içinde klasör yapısı düzeltme
           if [ -d "./outputs/nizami-model-output" ]; then
             mv ./outputs/nizami-model-output/outputs/* ./outputs/ 2>/dev/null || true

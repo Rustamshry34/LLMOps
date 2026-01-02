@@ -29,7 +29,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
     torch_dtype=torch.float16 if device == "cuda" else torch.float32,
     device_map="auto"
 )
-model = PeftModel.from_pretrained(base_model, MODEL_DIR).to("cpu")
+model = PeftModel.from_pretrained(base_model, MODEL_DIR).to(device)
 model.eval()
 
 # --------------------------------------------------

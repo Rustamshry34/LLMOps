@@ -4,8 +4,10 @@ def generate_conversation(examples):
     answers   = examples["Response"]
     conversations = []
     for p, m, a in zip(problems, metadata, answers):
-        resp = f"<think>{m}</think>\n\n"
-               f"<answer>{a}</answer>"
+        resp = (
+            f"<think>{m}</think>\n\n"
+            f"<answer>{a}</answer>" 
+        )
         conversations.append([
             {"role": "user",      "content": p},
             {"role": "assistant", "content": resp}

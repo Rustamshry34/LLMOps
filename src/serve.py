@@ -18,9 +18,9 @@ llm = LLM(
 )
 
 sampling = SamplingParams(
-    temperature=0.7,
+    temperature=0.6,
     top_p=0.95,
-    max_tokens=512
+    max_tokens=1024
 )
 
 class GenerateRequest(BaseModel):

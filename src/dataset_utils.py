@@ -1,10 +1,11 @@
 def generate_conversation(examples):
-    problems  = examples["question"]
-    metadata  = examples["metadata"]
-    answers   = examples["answer"]
+    problems  = examples["Question"]
+    metadata  = examples["Complex_CoT"]
+    answers   = examples["Response"]
     conversations = []
     for p, m, a in zip(problems, metadata, answers):
-        resp = f"<think>{m.get('reasoning', '')}</think>\n\n<answer>{a}</answer>"
+        resp = f"<think>{m}</think>\n\n"
+               f"<answer>{a}</answer>"
         conversations.append([
             {"role": "user",      "content": p},
             {"role": "assistant", "content": resp}
@@ -16,7 +17,7 @@ def build_combined_dataset(tokenizer, non_reasoning_pct: float = 0.0, seed=3407)
     import pandas as pd
     # ---------- reasoning ----------
     reasoning_ds = load_dataset(
-        "moremilk/CoT_Temporal_Reasoning_Dataset",
+        "musaoc/Quran-reasoning-SFT",
         split="train"
     )
     reasoning_ds = reasoning_ds.map(

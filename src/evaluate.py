@@ -15,7 +15,7 @@ from peft import PeftModel
 
 TOKENIZER_DIR = "./outputs"
 MODEL_DIR     = "./outputs"
-TEST_SAMPLES  = 250   # CI için hızlı feedback
+TEST_SAMPLES  = 100   # CI için hızlı feedback
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -36,7 +36,7 @@ model.eval()
 # Dataset
 # --------------------------------------------------
 test_ds = load_dataset(
-    "moremilk/CoT_Temporal_Reasoning_Dataset",
+    "musaoc/Quran-reasoning-SFT",
     split=f"train[:{TEST_SAMPLES}]"
 )
 
@@ -55,8 +55,8 @@ losses = []
 # Evaluation loop
 # --------------------------------------------------
 for sample in tqdm(test_ds, desc="Evaluating"):
-    prompt = sample["question"]
-    reference = sample["answer"]
+    prompt = sample["Question"]
+    reference = sample["Response"]
     
     messages = [{"role": "user", "content": prompt}]
     text = tokenizer.apply_chat_template(

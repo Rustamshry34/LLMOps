@@ -90,4 +90,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: pip install -r docker/requirements-serving.txt
       - run: docker build -t nizami-1.7b:latest -f docker/Dockerfile .

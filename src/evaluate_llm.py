@@ -26,7 +26,7 @@ tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_DIR)
 base_model = AutoModelForCausalLM.from_pretrained(
     #MODEL_DIR,
     "Qwen/Qwen3-0.6B",
-    torch_dtype=torch.float16 if device == "cuda" else torch.float32,
+    dtype=torch.float16 if device == "cuda" else torch.float32,
     device_map="auto"
 )
 model = PeftModel.from_pretrained(base_model, MODEL_DIR).to(device)

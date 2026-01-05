@@ -35,10 +35,12 @@ jobs:
           slug = os.environ['KAGGLE_USERNAME'] + '/nizami-1-7b-cot-train'
           while True:
               status = kaggle.api.kernels_status(slug).status
-              print('Kernel status:', status)
-              if status in ['complete', 'error', 'failed']: break
+              status_str = status.value 
+              print('Kernel status:', status_str)
+              if status_str in ['complete', 'error', 'failed']: 
+                  break
               time.sleep(30)
-          if status != 'complete': exit(1)
+          if status_str != 'complete': exit(1)
           "
 
   evaluate:

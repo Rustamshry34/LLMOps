@@ -1,6 +1,7 @@
 # Core training
 datasets>=4.3.0
 pandas>=2.2.3
+transformers>=4.57.0
 
 # Evaluation
 evaluate>=0.4.1

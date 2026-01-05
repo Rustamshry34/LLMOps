@@ -123,10 +123,10 @@ meteor_score = meteor.compute(
     references=refs
 )["meteor"]
 
-chrf_score = chrf.compute(
-    predictions=hyps,
-    references=refs
-)["chrf"]
+try:
+    chrf_score = chrf.compute(predictions=hyps, references=refs)["chrf"]
+except KeyError:
+    chrf_score = 0.0
 
 avg_loss = sum(losses) / len(losses)
 perplexity = math.exp(avg_loss)

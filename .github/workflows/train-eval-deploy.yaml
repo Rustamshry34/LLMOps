@@ -37,10 +37,10 @@ jobs:
               status = kaggle.api.kernels_status(slug).status
               status_str = status.value 
               print('Kernel status:', status_str)
-              if status_str in ['complete', 'error', 'failed']: 
+              if status_str in [2, 3, 4]: 
                   break
               time.sleep(30)
-          if status_str != 'complete': exit(1)
+          if status_str != 2: exit(1)
           "
 
   evaluate:

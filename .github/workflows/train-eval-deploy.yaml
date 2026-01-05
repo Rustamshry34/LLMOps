@@ -70,7 +70,7 @@ jobs:
           fi
       - run: pip install -r docker/requirements.txt
       - run: python src/evaluate.py
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: metrics
           path: metrics.json

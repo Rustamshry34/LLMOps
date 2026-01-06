@@ -29,7 +29,7 @@ api = HfApi(token=HF_TOKEN)
 # --------------------------------------------------
 try:
     api.repo_info(repo_id=MODEL_ID, repo_type="model")
-except RepositoryNotFoundError:
+except Exception:
     print(f" Creating new HF repo: {MODEL_ID}")
     api.create_repo(repo_id=MODEL_ID, repo_type="model", private=False)
 

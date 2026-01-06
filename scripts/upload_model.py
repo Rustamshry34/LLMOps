@@ -27,7 +27,8 @@ api = HfApi(token=HF_TOKEN)
 # 1. Find latest version tag (vX.Y)
 # --------------------------------------------------
 def get_next_version(repo_id: str) -> str:
-    tags = api.list_repo_tags(repo_id=repo_id, repo_type="model")
+    refs = api.list_repo_refs(repo_id=repo_id, repo_type="model")
+    tags = refs.tags
     versions = []
 
     for tag in tags:

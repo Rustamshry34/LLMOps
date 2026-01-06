@@ -11,7 +11,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from datasets import load_dataset
 from evaluate import load
 from tqdm import tqdm
-from peft import PeftModel
+#from peft import PeftModel
 
 TOKENIZER_DIR = "./outputs"
 MODEL_DIR     = "./outputs"
@@ -23,13 +23,12 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 # Load model & tokenizer
 # --------------------------------------------------
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_DIR)
-base_model = AutoModelForCausalLM.from_pretrained(
-    #MODEL_DIR,
-    "Qwen/Qwen3-0.6B",
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_DIR,
     dtype=torch.float16 if device == "cuda" else torch.float32,
     device_map="auto"
 )
-model = PeftModel.from_pretrained(base_model, MODEL_DIR).to(device)
+#model = PeftModel.from_pretrained(base_model, MODEL_DIR).to(device)
 model.eval()
 
 # --------------------------------------------------

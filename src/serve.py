@@ -9,6 +9,7 @@ import torch
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
 
 MODEL_ID = os.getenv("MODEL_ID", "Rustamshry/Qwen3-CoT")
 

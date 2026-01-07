@@ -3,7 +3,7 @@ datasets>=4.3.0
 pandas>=2.2.3
 transformers>=4.57.0
 torch>=2.6.0
-peft>= 0.15.0
+peft>=0.15.0
 
 # Evaluation
 evaluate>=0.4.1

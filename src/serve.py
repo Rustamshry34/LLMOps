@@ -14,13 +14,14 @@ MODEL_ID = os.getenv("MODEL_ID", "Rustamshry/Qwen3-CoT")
 
 app = FastAPI(title="Nizami-1.7B-CoT (CPU Inference)")
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
-model = AutoModelForCausalLM.from_pretrained(
-    MODEL_ID,
+tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-0.6B")
+base_model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen3-0.6B",
     device_map={"": "cpu"},
     trust_remote_code=True,
     dtype=torch.float32
 )
+model = PeftModel.from_pretrained(base_model, MODEL_ID).to("cpu")
 model.eval()
 
 

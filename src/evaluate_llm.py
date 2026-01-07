@@ -13,7 +13,7 @@ from evaluate import load
 from tqdm import tqdm
 from peft import PeftModel
 
-#TOKENIZER_DIR = "./outputs"
+TOKENIZER_DIR = "./outputs"
 MODEL_DIR     = "./outputs"
 TEST_SAMPLES  = 100   # CI için hızlı feedback
 
@@ -23,7 +23,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 # Load model & tokenizer
 # --------------------------------------------------
 
-tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-0.6B")
+tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_DIR)
 base_model = AutoModelForCausalLM.from_pretrained(
     "Qwen/Qwen3-0.6B",
     dtype=torch.float16 if device == "cuda" else torch.float32,

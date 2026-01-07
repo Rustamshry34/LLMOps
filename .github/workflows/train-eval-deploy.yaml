@@ -52,7 +52,7 @@ jobs:
         with: {python-version: '3.10'}
         
       - name: Wait 1 minute before downloading dataset
-        run: sleep 60
+        run: sleep 180
         
       - name: Install Kaggle API
         run: pip install kaggle

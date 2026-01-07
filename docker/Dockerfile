@@ -1,12 +1,12 @@
 # -------------------------------------------------
 # Builder
 # -------------------------------------------------
-FROM python:3.10-slim as builder
+FROM python:3.10-slim AS builder
 
 ENV PYTHONUNBUFFERED=1
 WORKDIR /build
 
-COPY requirements-serving.txt .
+COPY docker/requirements-serving.txt requirements-serving.txt
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements-serving.txt
 

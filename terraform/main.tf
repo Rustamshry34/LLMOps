@@ -34,7 +34,7 @@ data "aws_subnets" "default" {
 # SSH key pair — Terraform tarafından yönetilir
 resource "aws_key_pair" "deployer" {
   key_name   = var.key_pair_name
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = var.public_key
 }
 
 # Security group: allow SSH (22) and inference API (8000)

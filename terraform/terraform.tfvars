@@ -1,0 +1,6 @@
+region           = "eu-north-1"
+instance_type    = "t3.micro"
+key_pair_name    = "llmops-deployer"
+github_repo      = "rustamshry34/llmops"
+docker_image_tag = "latest"
+hf_model_id      = "Rustamshry/Qwen3-CoT"

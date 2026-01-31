@@ -1,7 +1,7 @@
 variable "region" {
   description = "AWS region"
   type        = string
-  default     = "us-east-1"
+  default     = "eu-north-1"
 }
 
 variable "instance_type" {
@@ -19,7 +19,7 @@ variable "key_pair_name" {
 variable "github_repo" {
   description = "GitHub repository name for GHCR image (e.g., owner/repo)"
   type        = string
-  default     = "rustamshry34/LLMOps"
+  default     = "rustamshry34/llmops"
 }
 
 variable "docker_image_tag" {

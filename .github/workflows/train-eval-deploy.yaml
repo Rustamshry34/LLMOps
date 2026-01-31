@@ -161,7 +161,8 @@ jobs:
             -var="github_repo=rustamshry34/llmops" \
             -var="docker_image_tag=latest" \
             -var="hf_model_id=Rustamshry/Qwen3-CoT" \
-            -var="region=eu-north-1"
+            -var="region=eu-north-1" \
+            -var="public_key=${{ env.PUBLIC_KEY_CONTENT }}"
         working-directory: ./terraform
 
       - name: Get Terraform Outputs

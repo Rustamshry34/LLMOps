@@ -33,3 +33,9 @@ variable "hf_model_id" {
   type        = string
   default     = "Rustamshry/Qwen3-CoT"
 }
+
+variable "public_key" {
+  description = "SSH public key content for AWS key pair"
+  type        = string
+}
+
